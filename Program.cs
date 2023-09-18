@@ -15,7 +15,7 @@ static void Menu()
     case 1:
       AbrirArquivo(); break;
     case 2:
-      EditarArquivo(); break;
+      CriarArquivo(); break;
     case 0:
       System.Environment.Exit(0); break;
     default: Menu(); break;
@@ -25,8 +25,13 @@ static void Menu()
 static void AbrirArquivo()
 {
   Console.Clear();
-  Console.WriteLine("Qual o caminho do arquivo?");
-  string path = Console.ReadLine();
+  Console.WriteLine("Qual arquivo você deseja abrir?");
+
+  string[] fyles = Directory.GetFiles("C:/dev/texteditor/texts", "*", 0);
+  Console.WriteLine(String.Join(Environment.NewLine, fyles));
+
+  string filename = Console.ReadLine();
+  string path = $"C:/dev/texteditor/texts/{filename}.txt";
 
   using (var file = new StreamReader(path))
   {
@@ -34,11 +39,10 @@ static void AbrirArquivo()
     Console.Write("");
 
     Console.Write(fileText);
-
   }
 }
 
-static void EditarArquivo()
+static void CriarArquivo()
 {
   Console.Clear();
   Console.WriteLine("Digite seu texto abaixo (ESC para sair)");
@@ -58,8 +62,9 @@ static void EditarArquivo()
 static void SalvarArquivo(string text)
 {
   Console.Clear();
-  Console.WriteLine("Qual caminho para salvar o arquivo?");
-  var path = Console.ReadLine();
+  Console.WriteLine("Qual o nome do arquivo?");
+  string filename = Console.ReadLine();
+  string path = $"C:/dev/texteditor/texts/{filename}.txt";
 
   using (var file = new StreamWriter(path))
   {
