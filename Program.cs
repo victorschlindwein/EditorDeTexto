@@ -35,6 +35,7 @@ static void AbrirArquivo()
 
   using (var file = new StreamReader(path))
   {
+    Console.Clear();
     string fileText = file.ReadToEnd();
     Console.Write("");
 
